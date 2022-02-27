@@ -24,7 +24,7 @@ class User {
 
         await userModule.findOne(email)
             .then(answer => {
-                if (answer[0].cout > 0) {
+                if (answer[0].count > 0) {
                     cxt.body = {
                         answer: 'данный email уже зарегестрирован'
 
