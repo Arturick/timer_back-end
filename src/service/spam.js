@@ -3,7 +3,7 @@ const spamModel = require('../module/spam');
 const spamLog = {
     async checkLogin(ip){
         let answ = 0;
-        await spamModel.select(ip ,"login")
+        await spamModel.select("login")
             .then(answer => {
                console.log(answer[0][0])
                if(answer[0][0].count > 10){
@@ -19,7 +19,7 @@ const spamLog = {
                 },
     async checkChange(ip){
         let answ = 0;
-        await spamModel.select(ip ,"change")
+        await spamModel.select("change")
             .then(answer => {
                 console.log(answer[0][0]['count(*)'] > 10);
                 if(answer[0][0].count > 10){

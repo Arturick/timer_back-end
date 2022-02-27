@@ -17,9 +17,9 @@ const spamModel = {
         connection.query(
             `DELETE  FROM spam WHERE id = '${id}'  AND action = '${action}' AND  date < DATE_SUB(NOW(),INTERVAL '${list[action]}' HOUR) `
         ),
-    select  : async (id,action) =>
+    select  : async (action) =>
         connection.query(
-            `SELECT count(*) as count FROM spam WHERE id = '${id}' AND action = '${action}' AND date > DATE_SUB(NOW(),INTERVAL ${list[action]} HOUR) `
+            `SELECT count(*) as count FROM spam WHERE  action = '${action}' AND date > DATE_SUB(NOW(),INTERVAL ${list[action]} HOUR) `
         ),
 }
 
