@@ -24,7 +24,7 @@ const  email = {
             to: email , // list of receivers
             subject: "Hello ✔", // Subject line
             text: "Здравствуйте, чтобы активировать свой аккаунт перейдите по ссылке" , // plain text body
-            html: `<a href='http://localhost/user/confirmEmail/${link}'>http://localhost/user/confirmEmail/${link}<a/>`, // html body
+            html: `<a href='${config.host}/user/confirmEmail/${link}'>http://localhost/user/confirmEmail/${link}<a/>`, // html body
         });
 
     },
