@@ -1,0 +1,30 @@
+/user/register
+body : {
+	email : emailпользователя
+	password : password пользователя
+
+}
+answer : {
+	tokens : {refresh, access}
+
+}
+
+/user/login
+body : {
+	email : emailпользователя
+	password : password пользователя
+
+}
+
+answer : {
+	user : userObjeckt		
+	
+}
+
+/user/logout
+
+
+/user/changeLog
+/user/confirmEmail/:code
+/user/sendCode
+/user/refresh
