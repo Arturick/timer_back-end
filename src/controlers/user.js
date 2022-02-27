@@ -24,17 +24,29 @@ class User {
 
         await userModule.findOne(email)
             .then(answer => {
-                if (answer[0].cout > 0) {
+
+                if ((answer[0][0]['count(*)'] > 0) == true) {
+
+                    console.log(answer[0][0]['count(*)'] > 0)
+                    cxt.status = 200;
                     cxt.body = {
-                        answer: 'данный email уже зарегестрирован'
+                        "answer": 'данный email уже зарегестрирован'
 
                     }
-                    return 0;
+
+
                 }
             })
             .catch(error => {
                 throw ApiError.ServerError();
             })
+        try {
+            cxt.body.answer
+            return 0;
+        } catch (e) {
+
+        }
+
         let userId = uuid();
         let tokens = await token.createToken(userId);
         await userModule.register(email, password, userId)

@@ -24,12 +24,12 @@ router.use('/post', Post.routes());
 
 app.use(router.routes());
 app.use(bodyParser());
-app.use(userMW);
+
 
 
 
 if (!module.parent) {
     app.listen(config.PORT,() => {
-        console.log(`server in: 127.0.0.1:${config.PORT}`);
+        console.log(`server in: PORT:${config.PORT}`);
     });
 }

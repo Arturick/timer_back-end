@@ -75,7 +75,7 @@ class Task {
                 console.log(answer[0])
             })
             .catch(err => ApiError.ServerError())
-
+        return 0;
     }
 
 }

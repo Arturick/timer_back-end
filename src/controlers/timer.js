@@ -72,7 +72,7 @@ class Timer {
                 }
             })
             .catch(err => console.log(err))
-
+        return 0;
 
     }
     async getOne(cxt){
