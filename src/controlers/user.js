@@ -76,6 +76,7 @@ class User {
             cxt.body = {
                 answ : "слишком часто логинитесь"
             }
+            return 0;
         }
         await userModule.login(email, password)
             .then(async answer => {
@@ -123,6 +124,7 @@ class User {
             cxt.body = {
                 answ : "слишком часто меняете данные"
             }
+            return 0;
         }
         let newCode = uuid();
         await userModule.updateCode(email,validCode,newCode)

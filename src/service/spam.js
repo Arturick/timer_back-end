@@ -5,7 +5,8 @@ const spamLog = {
         let answ = 0;
         await spamModel.select(ip ,"login")
             .then(answer => {
-               if(answer[0][0]['count(*)'] > 10){
+               console.log(answer[0][0])
+               if(answer[0][0].count > 10){
                    answ = 1;
                    return null;
                }
@@ -21,7 +22,7 @@ const spamLog = {
         await spamModel.select(ip ,"change")
             .then(answer => {
                 console.log(answer[0][0]['count(*)'] > 10);
-                if(answer[0][0]['count(*)'] > 10){
+                if(answer[0][0].count > 10){
                     answ = 1;
                     return null;
                 }
