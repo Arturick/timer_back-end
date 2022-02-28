@@ -9,9 +9,9 @@ const postModule = {
     delete : async (userId, postId) =>
         connection.query(`DELETE FROM posts WHERE userId = '${userId}' AND postId = '${postId}'`),
     getAll : async (userId) =>
-        connection.query(`SELECT * FROM posts WHERE  userId = '${userId}'`),
+        connection.query(`SELECT * FROM posts `),
     getOne : async (userId, postId) =>
-        connection.query(`SELECT * FROM posts WHERE  userId = '${userId}' AND postId = '${postId}'`)
+        connection.query(`SELECT * FROM posts WHERE   postId = '${postId}'`)
 
 }
 
