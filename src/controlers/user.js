@@ -4,6 +4,9 @@ const token = require("../service/Token");
 const emailService = require("../service/email");
 const uuid = require('uuid').v4
 const spamLog = require("../service/spam")
+let regEmail = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
+
+
 
 class User {
     async refreshToken(cxt){
@@ -21,6 +24,15 @@ class User {
 
         const {email, password} = cxt.request.body;
         if (!email || !password) throw ApiError.BadRequest();
+
+        if(!regEmail.test(email)){
+            cxt.status = 200;
+            cxt.body = {
+                answer : 'Не валидный емэил'
+            }
+            return null;
+        }
+
 
         await userModule.findOne(email)
             .then(answer => {
