@@ -34,7 +34,8 @@ class User {
         }
 
 
-        await userModule.findOne(email)
+
+            await userModule.findOne(email)
             .then(answer => {
 
 
@@ -80,7 +81,7 @@ class User {
 
     async login(cxt) {
         const {email, password} = cxt.request.body;
-        if (!email || !password) throw ApiError.BadRequest();
+        if (!email || !password)  throw ApiError.BadRequest();
 
 
         if(!await spamLog.checkLogin(cxt.request.ip)){
@@ -100,6 +101,7 @@ class User {
                     cxt.status = 200;
                     cxt.body = {
                         answ: "not confirm email"
+
                     }
 
                     return 0;
@@ -138,6 +140,38 @@ class User {
             }
             return 0;
         }
+        if(change === 'email'){
+            if(!regEmail.test(email)){
+                cxt.status = 200;
+                cxt.body = {
+                    answer : 'Не валидный емэил'
+                }
+                return null;
+            }
+            await userModule.findOne(newValid)
+                .then(answer => {
+
+
+                    if (answer[0][0]['count(*)'] > 0) {
+
+                        cxt.body = {
+                            "answer": 'данный email уже зарегестрирован'
+
+                        }
+
+
+                    }
+                })
+                .catch(error => {
+                    throw ApiError.ServerError();
+                })
+            try {
+                cxt.body.answer
+                return 0;
+            } catch (e) {
+
+            }
+        }
         let newCode = uuid();
         await userModule.updateCode(email,validCode,newCode)
         await userModule.changeLog(email, newCode, change, newValid)
@@ -162,6 +196,13 @@ class User {
     async sendCode(cxt) {
         const {email} = cxt.request.body;
 
+        if(!regEmail.test(email)){
+            cxt.status = 200;
+            cxt.body = {
+                answer : 'Не валидный емэил'
+            }
+            return null;
+        }
         let code = await userModule.getCode(email)
             .then(answer => {
                 if (!answer[0][0]) {
