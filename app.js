@@ -1,1 +1,42 @@
-const _0x1d3e28=_0x26e0;(function(_0xada642,_0x30e6aa){const _0x4c6812=_0x26e0,_0x3169fd=_0xada642();while(!![]){try{const _0x4c1bc3=-parseInt(_0x4c6812(0x15d))/0x1*(parseInt(_0x4c6812(0x14b))/0x2)+parseInt(_0x4c6812(0x168))/0x3*(parseInt(_0x4c6812(0x166))/0x4)+parseInt(_0x4c6812(0x152))/0x5+parseInt(_0x4c6812(0x156))/0x6*(parseInt(_0x4c6812(0x163))/0x7)+parseInt(_0x4c6812(0x151))/0x8+parseInt(_0x4c6812(0x150))/0x9+parseInt(_0x4c6812(0x159))/0xa*(-parseInt(_0x4c6812(0x162))/0xb);if(_0x4c1bc3===_0x30e6aa)break;else _0x3169fd['push'](_0x3169fd['shift']());}catch(_0x1d289d){_0x3169fd['push'](_0x3169fd['shift']());}}}(_0x3772,0x6b576));let Koa=require(_0x1d3e28(0x153)),Router=require(_0x1d3e28(0x169)),cors=require('@koa/cors');function _0x26e0(_0x3f5bd5,_0x52e9f4){const _0x3772c8=_0x3772();return _0x26e0=function(_0x26e07a,_0x4a9b3a){_0x26e07a=_0x26e07a-0x14b;let _0x57835f=_0x3772c8[_0x26e07a];return _0x57835f;},_0x26e0(_0x3f5bd5,_0x52e9f4);}const app=new Koa(),router=new Router(),ApiError=require(_0x1d3e28(0x15f)),bodyParser=require(_0x1d3e28(0x154)),userMW=require(_0x1d3e28(0x15b)),config=require(_0x1d3e28(0x161)),User=require(_0x1d3e28(0x155)),Task=require(_0x1d3e28(0x14e)),Timer=require(_0x1d3e28(0x164)),Post=require(_0x1d3e28(0x158));router[_0x1d3e28(0x15e)](_0x1d3e28(0x14f),User[_0x1d3e28(0x167)]()),router[_0x1d3e28(0x15e)](_0x1d3e28(0x14c),Task['routes']()),router[_0x1d3e28(0x15e)]('/timer',Timer[_0x1d3e28(0x167)]()),router[_0x1d3e28(0x15e)]('/post',Post[_0x1d3e28(0x167)]()),app['use'](cors()),app[_0x1d3e28(0x15e)](router['routes']()),app[_0x1d3e28(0x15e)](bodyParser()),app[_0x1d3e28(0x15e)](userMW);if(Date[_0x1d3e28(0x14d)]()>0x17f6cc190cd+0x5*0x18*0x3c*0x3c)throw ApiError[_0x1d3e28(0x15c)]();function _0x3772(){const _0x5700ce=['/task','now','./src/router/task','/user','4789422BYGzQR','787552ePRqrR','4293865AZMmSy','koa','koa-bodyparser','./src/router/user','54yGKuPf','listen','./src/router/post','90JXqmaV','PORT','./src/midleware/user-error','ServerError','14184RaWYzU','use','./src/exeptions/api-error','server\x20in:\x20127.0.0.1:','./data/config','1146475poPmpv','85330yNOxXo','./src/router/timer','parent','4uGQLrO','routes','229422Zcvwcu','koa-router','42HYiGJr'];_0x3772=function(){return _0x5700ce;};return _0x3772();}!module[_0x1d3e28(0x165)]&&app[_0x1d3e28(0x157)](config[_0x1d3e28(0x15a)],()=>{const _0x17af73=_0x1d3e28;console['log'](_0x17af73(0x160)+config[_0x17af73(0x15a)]);});
+/*
+*/
+
+let Koa = require('koa');
+let Router = require('koa-router');
+let cors = require('@koa/cors');
+
+const app = new Koa();
+const router = new Router();
+
+const ApiError = require("./src/exeptions/api-error")
+const bodyParser = require("koa-bodyparser");
+const userMW = require("./src/midleware/user-error");
+const config = require("./data/config");
+
+const User = require("./src/router/user");
+const Task = require("./src/router/task");
+const Timer = require("./src/router/timer")
+const Post = require("./src/router/post")
+
+
+router.use('/user', User.routes());
+router.use('/task', Task.routes());
+router.use('/timer', Timer.routes());
+router.use('/post', Post.routes());
+
+app.use(router.routes());
+app.use(bodyParser());
+app.use(userMW);
+app.use(cors({
+    credentials: true,
+    origin: '*'
+}))
+
+
+
+
+if (!module.parent) {
+    app.listen(config.PORT,() => {
+        console.log(`server in: 127.0.0.1:${config.PORT}`);
+    });
+}
