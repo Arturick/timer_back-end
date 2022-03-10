@@ -1,5 +1,5 @@
 module.exports = class ApiError extends Error {
-    status;node
+    status;
     errors;
 
     constructor(status, message) {
