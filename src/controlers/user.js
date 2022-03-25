@@ -1,1 +1,155 @@
-function _0x167d(_0xdbf48a,_0x3a5280){const _0x691400=_0x6914();return _0x167d=function(_0x167d82,_0x461fa1){_0x167d82=_0x167d82-0x144;let _0x9134be=_0x691400[_0x167d82];return _0x9134be;},_0x167d(_0xdbf48a,_0x3a5280);}function _0x6914(){const _0x133bdc=['NotFound','аккаунт\x20цспешно\x20создан\x20подтвердите\x20email','test','BadRequest','activate','10453510mdFPgU','exports','not\x20confirm\x20email','log','1012182zhsibS','createToken','sendCode','updateCode','checkLogin','logout','41436uHdiVI','getCode','../service/email','catch','count(*)','status','12uVsiMH','3008572IFLdsC','resetCode','register','answer','1317076mVfNQW','5YIBgjl','слишком\x20часто\x20логинитесь','request','changeLog','Не\x20валидный\x20емэил','данный\x20email\x20уже\x20зарегестрирован','body','params','then','632YVmDKr','uuid','../service/spam','185862qacOqK','ServerError','../service/Token','confirmLink','108866VhsMxY','login','findOne','code','confirmEmail'];_0x6914=function(){return _0x133bdc;};return _0x6914();}const _0x4eafbc=_0x167d;(function(_0x372a16,_0x49d58a){const _0x54bda7=_0x167d,_0x23fcbf=_0x372a16();while(!![]){try{const _0x5b73d5=-parseInt(_0x54bda7(0x165))/0x1+-parseInt(_0x54bda7(0x161))/0x2*(parseInt(_0x54bda7(0x14f))/0x3)+parseInt(_0x54bda7(0x154))/0x4+parseInt(_0x54bda7(0x155))/0x5*(parseInt(_0x54bda7(0x173))/0x6)+-parseInt(_0x54bda7(0x150))/0x7+parseInt(_0x54bda7(0x15e))/0x8*(-parseInt(_0x54bda7(0x149))/0x9)+parseInt(_0x54bda7(0x16f))/0xa;if(_0x5b73d5===_0x49d58a)break;else _0x23fcbf['push'](_0x23fcbf['shift']());}catch(_0xab4d14){_0x23fcbf['push'](_0x23fcbf['shift']());}}}(_0x6914,0x41b9f));const ApiError=require('../exeptions/api-error'),userModule=require('../module/user'),token=require(_0x4eafbc(0x163)),emailService=require(_0x4eafbc(0x14b)),uuid=require(_0x4eafbc(0x15f))['v4'],spamLog=require(_0x4eafbc(0x160));let regEmail=/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;class User{async['refreshToken'](_0x3e4b17){const _0x34da07=_0x4eafbc,{userId:_0x41440a,rToken:_0x2d5bd2}=_0x3e4b17['request'][_0x34da07(0x15b)];if(!_0x41440a||!_0x2d5bd2)throw ApiError[_0x34da07(0x16d)]();let _0x43c737=await token['update'](_0x41440a,_0x2d5bd2);if(!_0x43c737)throw ApiError['BadRequest']();_0x3e4b17[_0x34da07(0x14e)]=0xc8,_0x3e4b17[_0x34da07(0x15b)]={'tokens':_0x43c737};}async[_0x4eafbc(0x152)](_0x47e5d3){const _0x1ee7a1=_0x4eafbc,{email:_0x3862f4,password:_0x2d0152}=_0x47e5d3[_0x1ee7a1(0x157)][_0x1ee7a1(0x15b)];if(!_0x3862f4||!_0x2d0152)throw ApiError['BadRequest']();if(!regEmail[_0x1ee7a1(0x16c)](_0x3862f4))return _0x47e5d3[_0x1ee7a1(0x14e)]=0xc8,_0x47e5d3[_0x1ee7a1(0x15b)]={'answer':'Не\x20валидный\x20емэил'},null;await userModule[_0x1ee7a1(0x167)](_0x3862f4)[_0x1ee7a1(0x15d)](_0x304280=>{const _0x387df3=_0x1ee7a1;_0x304280[0x0][0x0][_0x387df3(0x14d)]>0x0&&(_0x47e5d3['body']={'answer':'данный\x20email\x20уже\x20зарегестрирован'});})[_0x1ee7a1(0x14c)](_0x3cbe8c=>{const _0x2d7a06=_0x1ee7a1;throw ApiError[_0x2d7a06(0x162)]();});try{return _0x47e5d3[_0x1ee7a1(0x15b)][_0x1ee7a1(0x153)],0x0;}catch(_0x262206){}let _0x73a912=uuid(),_0x419417=await token[_0x1ee7a1(0x144)](_0x73a912);await userModule[_0x1ee7a1(0x152)](_0x3862f4,_0x2d0152,_0x73a912)['then'](_0x3af525=>{const _0x49d1a9=_0x1ee7a1;emailService[_0x49d1a9(0x164)](_0x3862f4),_0x47e5d3['status']=0xc8,_0x47e5d3['body']={'tokens':_0x419417,'answ':_0x49d1a9(0x16b)};})['catch'](_0x530ee8=>{const _0x3d3a95=_0x1ee7a1;console[_0x3d3a95(0x172)](_0x530ee8);throw ApiError[_0x3d3a95(0x162)]();});}async['login'](_0x396fba){const _0x25e27d=_0x4eafbc,{email:_0xa48e05,password:_0x32b6f8}=_0x396fba[_0x25e27d(0x157)]['body'];if(!_0xa48e05||!_0x32b6f8)throw ApiError[_0x25e27d(0x16d)]();if(!await spamLog[_0x25e27d(0x147)](_0x396fba['request']['ip']))return _0x396fba[_0x25e27d(0x14e)]=0xc8,_0x396fba[_0x25e27d(0x15b)]={'answ':_0x25e27d(0x156)},0x0;await userModule[_0x25e27d(0x166)](_0xa48e05,_0x32b6f8)[_0x25e27d(0x15d)](async _0x28c2f7=>{const _0xa756ec=_0x25e27d;if(!_0x28c2f7[0x0][0x0])throw ApiError[_0xa756ec(0x16a)]();if(!_0x28c2f7[0x0][0x0][_0xa756ec(0x16e)])return _0x396fba[_0xa756ec(0x14e)]=0xc8,_0x396fba['body']={'answ':_0xa756ec(0x171)},0x0;let _0xeb4e77=await token[_0xa756ec(0x144)](_0x28c2f7[0x0][0x0]['id']);console[_0xa756ec(0x172)](_0xeb4e77),_0x396fba[_0xa756ec(0x14e)]=0xc8,_0x396fba[_0xa756ec(0x15b)]={'tokens':_0xeb4e77,'user':_0x28c2f7[0x0][0x0]};})[_0x25e27d(0x14c)](_0x19857e=>{throw ApiError['ServerError']();});}async[_0x4eafbc(0x148)](_0x5833e8){const _0x1a3a8a=_0x4eafbc,{refreshToken:_0x3f1ee1,userId:_0x38ccf}=_0x5833e8[_0x1a3a8a(0x157)][_0x1a3a8a(0x15b)];if(!_0x3f1ee1||!_0x38ccf)throw ApiError[_0x1a3a8a(0x16d)]();await token['delete'](_0x38ccf),_0x5833e8[_0x1a3a8a(0x14e)]=0xc8;}async[_0x4eafbc(0x158)](_0x55e2a1){const _0xa8752c=_0x4eafbc,{email:_0x56a6d9,change:_0x49fa25,validCode:_0x3faee6,newValid:_0x40b1a9}=_0x55e2a1[_0xa8752c(0x157)]['body'];if(!_0x56a6d9||!_0x3faee6||!_0x49fa25||!_0x40b1a9)throw ApiError[_0xa8752c(0x16d)]();if(!await spamLog['checkChange'](_0x55e2a1[_0xa8752c(0x157)]['ip']))return _0x55e2a1[_0xa8752c(0x14e)]=0xc8,_0x55e2a1[_0xa8752c(0x15b)]={'answ':'слишком\x20часто\x20меняете\x20данные'},0x0;if(_0x49fa25==='email'){if(!regEmail['test'](_0x56a6d9))return _0x55e2a1[_0xa8752c(0x14e)]=0xc8,_0x55e2a1[_0xa8752c(0x15b)]={'answer':_0xa8752c(0x159)},null;await userModule['findOne'](_0x40b1a9)[_0xa8752c(0x15d)](_0x35f517=>{const _0x3a23c=_0xa8752c;_0x35f517[0x0][0x0][_0x3a23c(0x14d)]>0x0&&(_0x55e2a1[_0x3a23c(0x15b)]={'answer':_0x3a23c(0x15a)});})['catch'](_0x508a76=>{const _0x4de383=_0xa8752c;throw ApiError[_0x4de383(0x162)]();});try{return _0x55e2a1[_0xa8752c(0x15b)][_0xa8752c(0x153)],0x0;}catch(_0x19c232){}}let _0x204bba=uuid();await userModule[_0xa8752c(0x146)](_0x56a6d9,_0x3faee6,_0x204bba),await userModule[_0xa8752c(0x158)](_0x56a6d9,_0x204bba,_0x49fa25,_0x40b1a9),_0x55e2a1['status']=0xc8;}async['confirmEmail'](_0x3abc1c){const _0x323a38=_0x4eafbc;if(!_0x3abc1c[_0x323a38(0x15c)][_0x323a38(0x168)])throw ApiError[_0x323a38(0x16d)]();console[_0x323a38(0x172)](_0x3abc1c[_0x323a38(0x15c)][_0x323a38(0x168)]),await userModule[_0x323a38(0x169)](_0x3abc1c[_0x323a38(0x15c)][_0x323a38(0x168)])[_0x323a38(0x15d)](_0x2036b8=>_0x3abc1c['status']=0xc8)[_0x323a38(0x14c)](_0x2610f8=>ApiError['ServerError']());}async[_0x4eafbc(0x145)](_0x53c3d5){const _0x28d3b1=_0x4eafbc,{email:_0x295c72}=_0x53c3d5[_0x28d3b1(0x157)][_0x28d3b1(0x15b)];if(!regEmail[_0x28d3b1(0x16c)](_0x295c72))return _0x53c3d5['status']=0xc8,_0x53c3d5['body']={'answer':_0x28d3b1(0x159)},null;let _0x5696ea=await userModule[_0x28d3b1(0x14a)](_0x295c72)['then'](_0x5c4c16=>{const _0xbebe50=_0x28d3b1;if(!_0x5c4c16[0x0][0x0])throw ApiError[_0xbebe50(0x16d)]();return _0x5c4c16[0x0][0x0][_0xbebe50(0x151)];});emailService['sendCode'](_0x295c72,_0x5696ea),_0x53c3d5[_0x28d3b1(0x14e)]=0xc8;}}module[_0x4eafbc(0x170)]=new User();
+const ApiError  = require("../exeptions/api-error")
+const userModule = require("../module/user");
+const token = require("../service/Token");
+const emailService = require("../service/email");
+const uuid = require('uuid').v4
+const spamLog = require("../service/spam")
+
+class User {
+    async refreshToken(cxt){
+        const {userId, rToken} = cxt.request.body;
+        if (!userId || !rToken) throw ApiError.BadRequest();
+        let tokens = await token.update(userId, rToken);
+        if(!tokens)throw ApiError.BadRequest();
+        cxt.status = 200;
+        cxt.body = {
+            "tokens" : tokens
+        }
+    }
+
+    async register(cxt) {
+
+        const {email, password} = cxt.request.body;
+        if (!email || !password) throw ApiError.BadRequest();
+
+        await userModule.findOne(email)
+            .then(answer => {
+                if (answer[0].cout > 0) {
+                    cxt.body = {
+                        answer: 'данный email уже зарегестрирован'
+
+                    }
+                    return 0;
+                }
+            })
+            .catch(error => {
+                throw ApiError.ServerError();
+            })
+        let userId = uuid();
+        let tokens = await token.createToken(userId);
+        await userModule.register(email, password, userId)
+            .then(answer => {
+
+                emailService.confirmLink(email);
+                cxt.status = 200;
+                cxt.body = {
+                    "tokens" : tokens,
+                    answ: "аккаунт цспешно создан подтвердите email"
+                }
+
+            }).catch(error => {
+                console.log(error)
+                throw ApiError.ServerError();
+            })
+
+
+    }
+
+    async login(cxt) {
+        const {email, password} = cxt.request.body;
+        if (!email || !password) throw ApiError.BadRequest();
+
+
+        if(!await spamLog.checkLogin(cxt.request.ip)){
+            cxt.status = 200;
+            cxt.body = {
+                answ : "слишком часто логинитесь"
+            }
+        }
+        await userModule.login(email, password)
+            .then(async answer => {
+                if (!answer[0][0]) {
+                    throw ApiError.NotFound();
+                }
+
+                if (!answer[0][0].activate) {
+                    cxt.status = 200;
+                    cxt.body = {
+                        answ: "not confirm email"
+                    }
+
+                    return 0;
+                }
+
+                let tokens = await token.createToken(answer[0][0].id)
+                console.log(tokens)
+                cxt.status = 200;
+                cxt.body = {
+                    "tokens": tokens,
+                    user: answer[0][0]
+                }
+
+            })
+            .catch(error => {
+                throw ApiError.ServerError();
+            })
+
+    }
+
+    async logout(cxt) {
+        const {refreshToken, userId} = cxt.request.body;
+        if (!refreshToken || !userId) throw ApiError.BadRequest();
+        await token.delete(userId);
+        cxt.status = 200;
+
+    }
+
+    async changeLog(cxt) {
+        const {email, change, validCode, newValid} = cxt.request.body;
+        if (!email || !validCode || !change || !newValid) throw ApiError.BadRequest();
+        if(!await spamLog.checkChange(cxt.request.ip)){
+            cxt.status = 200;
+            cxt.body = {
+                answ : "слишком часто меняете данные"
+            }
+        }
+        let newCode = Math.floor(Math.random() * (9999 - 1000)) + 1000;
+        await userModule.updateCode(email,validCode,newCode)
+        await userModule.changeLog(email, newCode, change, newValid)
+
+
+        cxt.status = 200;
+
+    }
+
+    async confirmEmail(cxt) {
+        if (!cxt.params.code) {
+            throw ApiError.BadRequest();
+        }
+        console.log(cxt.params.code)
+        await userModule.confirmEmail(cxt.params.code)
+            .then(answer => cxt.status = 200)
+            .catch(err => ApiError.ServerError());
+
+
+    }
+
+    async sendCode(cxt) {
+        const {email} = cxt.request.body;
+
+        let code = await userModule.getCode(email)
+            .then(answer => {
+                if (!answer[0][0]) {
+                    throw  ApiError.BadRequest()
+                }
+
+                return answer[0][0].resetCode
+            });
+
+        emailService.sendCode(email, code);
+        cxt.status = 200;
+
+    }
+}
+
+module.exports = new User();
