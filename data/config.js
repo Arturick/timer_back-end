@@ -1,6 +1,6 @@
 const config = {
     PORT : 80,
-    host : "62.113.102.207",
+    host : "194.87.214.98",
     secretJWT : "AKumySA",
     emailHost : "smtp.gmail.com",
     emailPort : "465",
